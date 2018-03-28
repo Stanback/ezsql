@@ -41,7 +41,7 @@
 	*  ezSQL Database specific class - sqlsrv
 	*/
 
-	if ( ! function_exists ('sqlsrv_connect') ) die('<b>Fatal Error:</b> ezSQL_sqlsrv requires the Microsoft PHP SQL Drivers to be installed. Also enable MS-SQL extension in PHP.ini file ');
+	if ( ! function_exists ('sqlsrv_connect') ) die('<b>Fatal Error:</b> ezSQL_sqlsrv requires the php_sqlsrv.dll or php_pdo_sqlsrv.dll to be installed. Also enable MS-SQL extension in PHP.ini file ');
 	if ( ! class_exists ('ezSQLcore') ) die('<b>Fatal Error:</b> ezSQL_sqlsrv requires ezSQLcore (ez_sql_core.php) to be included/loaded before it can be used');
 
 	class ezSQL_sqlsrv extends ezSQLcore
@@ -125,6 +125,24 @@
 			return $return_val;
 		}
 
+        function sql_escape_string($data) {
+            if ( !isset($data) ) return '';
+            if ( is_numeric($data) ) return $data;
+
+            $non_displayables = array(
+                '/%0[0-8bcef]/',            // url encoded 00-08, 11, 12, 14, 15
+                '/%1[0-9a-f]/',             // url encoded 16-31
+                '/[\x00-\x08]/',            // 00-08
+                '/\x0b/',                   // 11
+                '/\x0c/',                   // 12
+                '/[\x0e-\x1f]/'             // 14-31
+                );
+                
+            foreach ( $non_displayables as $regex )
+                $data = preg_replace( $regex, '', $data );
+            $data = str_replace("'", "''", $data );
+            return $data;
+        }
 
 		/**********************************************************************
 		*  Format a mssql string correctly for safe mssql insert
@@ -133,12 +151,7 @@
 
 		function escape($str)
 		{
-			//not sure about this.
-			//applying following logic
-			//1. add 1 more ' to ' character
-
-			return  str_ireplace("'", "''", $str);
-
+			return  $this->sql_escape_string($str);
 		}
 
 
@@ -153,7 +166,7 @@
 
 		function sysdate()
 		{
-			return "convert(varchar, GetDate(), 9)";
+			return "GETDATE()";
 		}
 
 		/**********************************************************************
