@@ -109,29 +109,4 @@ class async_mysqli extends ez_mysqli implements async_interface
 
         return $this->return_val;
     } // query
-	
-    /**
-     * Begin Mysql Transaction
-     */
-    public function beginTransaction()
-    {
-        /* turn autocommit off */
-        $this->dbh->autocommit(false);
-        $this->dbh->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
-        $this->isTransactional = true;
-    }
-
-    public function commit()
-    {
-        $this->dbh->commit();
-        $this->dbh->autocommit(true);
-        $this->isTransactional = false;
-    }
-    
-    public function rollback()
-    {
-        $this->dbh->rollBack();
-        $this->dbh->autocommit(true);
-        $this->isTransactional = false;
-    }
 } // ez_mysqli
