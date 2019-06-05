@@ -181,25 +181,4 @@ class async_pgsql extends ez_pgsql implements async_interface
 
         return $this->return_val;
     } // query
-    
-    /**
-     * Begin Postgresql Transaction
-     */
-    public function beginTransaction()
-    {
-        @\pg_query($this->dbh, "BEGIN");
-        $this->isTransactional = true;
-    }
-
-    public function commit()
-    {
-        @\pg_query($this->dbh, "COMMIT");
-        $this->isTransactional = false;
-    }
-
-    public function rollback()
-    {
-        @\pg_query($this->dbh, "ROLLBACK");
-        $this->isTransactional = false;
-    }
 } // ez_pgsql
