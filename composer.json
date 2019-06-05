@@ -1,9 +1,13 @@
 {
-    "name": "ezsql/ezsql",
-    "description": "Advance database access library. Make interacting with a database ridiculously easy.",
-    "keywords": ["mysql", "mysqli", "postgresql", "mssql", "sqlsrv", "sqlserver", "pdo", "sqlite", "sqlite3", "database", "abstraction", "sql", "dba"],
-    "license": ["LGPL-3.0-or-later", "MIT"],
+    "name": "symplely/sql",
+    "description": "An Asynchronous Advance database access library. Make interacting with a database ridiculously easy.",
+    "keywords": ["coroutine", "yield", "async", "await", "mysql", "mysqli", "postgresql", "mssql", "sqlsrv", "sqlserver", "pdo", "sqlite", "sqlite3", "database", "abstraction", "sql", "dba"],
+    "license": ["MIT"],
     "authors": [
+        {
+            "name": "Lawrence Stubbs",
+            "email": "lstubbs@techno.express"
+        },
         {
             "name": "Justin Vincent",
             "email": "webmaster@justinvincent.com"
@@ -11,18 +15,15 @@
         {
             "name": "Stefanie Janine Stoelting",
             "email": "mail@stefanie-stoelting.de"
-        },
-        {
-            "name": "l. stubbs",
-            "email": "lstubbs@techno.express"
         }
     ],
     "support": {
-        "issues": "https://github.com/ezSQL/ezSQL/issues"
+        "issues": "https://github.com/symplely/sql/issues"
     },
     "require": {
         "php": "^7.0",
-        "psr/container": "^1.0"
+        "psr/container": "^1.0",
+        "symplely/coroutine": "^1.1"
     },
     "provide": {
         "psr/container-implementation": "1.0"
@@ -37,8 +38,7 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": ">5.7.0",
-        "phpstan/phpstan": "^0.11.5"
+        "phpunit/phpunit": ">5.7.0"
     },
     "autoload-dev": {
         "psr-4": {
@@ -48,10 +48,5 @@
     "scripts": {
         "test": "phpunit --bootstrap vendor/autoload.php tests"
     },
-    "minimum-stability": "stable",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "4.0-dev"
-        }
-    }
+    "minimum-stability": "stable"
 }

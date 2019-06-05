@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace ezsql\Database;
 
 use Exception;
+use ezsql\Config;
 use ezsql\ConfigInterface;
 use ezsql\Database\ez_sqlite3;
 use ezsql\Database\async_interface;
+use Async\Coroutine\Kernel;
 
 class async_sqlite3 extends ez_sqlite3 implements async_interface
 {    
@@ -51,15 +53,17 @@ class async_sqlite3 extends ez_sqlite3 implements async_interface
         $use_prepare = $this->use_prepare;
 
         // return to caller, let other tasks start, otherwise block after
-        $db = yield \await_process(function () use($path, $name, $query, $use_prepare, $prepareActive, $preparedValues) {
-            $settings = new Config('sqlite3', [$path, $name]);
-            $db = new ez_sqlite3($settings);
-            $db->preparedValues = $preparedValues;
-            $db->prepareActive = $prepareActive;
-            $db->query($query, $use_prepare);
+        $db = yield Kernel::awaitProcess(
+            function () use($path, $name, $query, $use_prepare, $prepareActive, $preparedValues) {
+                $settings = new Config('sqlite3', [$path, $name]);
+                $db = new ez_sqlite3($settings);
+                $db->preparedValues = $preparedValues;
+                $db->prepareActive = $prepareActive;
+                $db->query($query, $use_prepare);
 
-            return $db;
-        });
+                return $db;
+            }
+        );
 
         $this->shortcutUsed = $db->shortcutUsed;
         $this->last_query = $db->last_query;

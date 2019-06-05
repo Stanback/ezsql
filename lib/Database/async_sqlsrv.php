@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace ezsql\Database;
 
 use Exception;
+use ezsql\Config;
 use ezsql\ConfigInterface;
 use ezsql\Database\ez_sqlsrv;
 use ezsql\Database\async_interface;
+use Async\Coroutine\Kernel;
 
 class async_sqlsrv extends ez_sqlsrv implements async_interface
 {    
@@ -50,7 +52,7 @@ class async_sqlsrv extends ez_sqlsrv implements async_interface
         $use_prepare = $this->use_prepare;
 
         // return to caller, let other tasks start, otherwise block after
-        $db = yield \await_process(
+        $db = yield Kernel::awaitProcess(
             function () use($user, $password, $name, $host, $query, $use_prepare, $prepareActive, $preparedValues) {
                 $settings = new Config('sqlsrv', [$user, $password, $name, $host]);
                 $db = new ez_sqlsrv($settings);

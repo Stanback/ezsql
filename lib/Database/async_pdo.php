@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace ezsql\Database;
 
 use Exception;
+use ezsql\Config;
 use ezsql\ConfigInterface;
 use ezsql\Database\ez_pdo;
 use ezsql\Database\async_interface;
+use Async\Coroutine\Kernel;
 
 class async_pdo extends ez_pdo implements async_interface
 {    
@@ -54,7 +56,7 @@ class async_pdo extends ez_pdo implements async_interface
         $use_prepare = $this->use_prepare;
 
         // return to caller, let other tasks start, otherwise block after
-        $db = yield \await_process(
+        $db = yield Kernel::awaitProcess(
             function () use($dsn, $user, $password, $options, $isfile, $query, $use_prepare, $prepareActive, $preparedValues) {
                 $settings = new Config('pdo', [$dsn, $user, $password, $options, $isfile]);
                 $db = new ez_pdo($settings);
