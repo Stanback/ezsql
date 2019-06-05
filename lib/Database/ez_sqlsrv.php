@@ -10,15 +10,15 @@ use ezsql\DatabaseInterface;
 
 class ez_sqlsrv extends ezsqlModel implements DatabaseInterface
 {    
-    private $return_val = 0;
-    private $is_insert = false;
-    private $shortcutUsed = false;
-    private $isTransactional = false;
+    protected $return_val = 0;
+    protected $is_insert = false;
+    protected $shortcutUsed = false;
+    protected $isTransactional = false;
 
     /**
      * ezSQL non duplicating data type id's; converting type ids to str
      */
-    private $ezsql_sqlsrv_type2str_non_dup = array
+    protected $ezsql_sqlsrv_type2str_non_dup = array
         (
         -5 => 'bigint', -7 => 'bit', 1 => 'char', 91 => 'date', -155 => 'datetimeoffset', 6 => 'float', -4 => 'image', 4 => 'int', -8 => 'nchar',
         -10 => 'ntext', 2 => 'numeric', -9 => 'nvarchar', 7 => 'real', 5 => 'smallint', -1 => 'text', -154 => 'time', -6 => 'tinyint', -151 => 'udt',
@@ -29,19 +29,19 @@ class ez_sqlsrv extends ezsqlModel implements DatabaseInterface
     * Database connection handle 
     * @var resource
     */
-    private $dbh;
+    protected $dbh;
 
     /**
      * Query result
      * @var mixed
      */
-    private $result;
+    protected $result;
 
     /**
      * Database configuration setting
      * @var ConfigInterface
      */
-    private $database;
+    protected $database;
 
     public function __construct(ConfigInterface $settings = null)
     {        

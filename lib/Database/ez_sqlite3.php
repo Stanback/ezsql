@@ -10,28 +10,28 @@ use ezsql\DatabaseInterface;
 
 class ez_sqlite3 extends ezsqlModel implements DatabaseInterface
 {
-    private $return_val = 0;
-    private $is_insert = false;
-    private $shortcutUsed = false;
-    private $isTransactional = false;
+    protected $return_val = 0;
+    protected $is_insert = false;
+    protected $shortcutUsed = false;
+    protected $isTransactional = false;
 
     /**
     * Database connection handle 
     * @var resource
     */
-    private $dbh;
+    protected $dbh;
 
     /**
      * Query result
      * @var mixed
      */
-    private $result;
+    protected $result;
 
     /**
      * Database configuration setting
      * @var ConfigInterface
      */
-    private $database;
+    protected $database;
 
     /**
      *  Constructor - allow the user to perform a quick connect at the
