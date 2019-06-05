@@ -21,20 +21,6 @@ For an full overview of **ezsql**, see [documentation Wiki](https://github.com/e
 ## Usage
 
 ```php
-require 'vendor/autoload.php';
-
-// **** is one of mysqli, pgsql, sqlsrv, sqlite3, or Pdo.
-use ezsql\Database;
-
-$db = Database::initialize('****', [$dsn_path_user, $password, $database, $other_settings], $optional_tag);
-
-// Is same as:
-use ezsql\Config;
-use ezsql\Database\ez_****;
-
-$setting = new Config('****', [$dsn_path_user, $password, $database, $other_settings]);
-
-$db = new ez_****($settings);
 ```
 
 This library will assume the developer is using some sort of IDE with intellisense enabled. The comments/doc-block area will hold any missing documentations. For additional examples see __phpunit__ tests, The tests are fully functional integration tests, meaning the are live database tests, no mocks.
