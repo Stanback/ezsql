@@ -1,22 +1,22 @@
-# **ezsql**
+# **sql**
 
-[![Build Status](https://travis-ci.org/ezSQL/ezsql.svg?branch=master)](https://travis-ci.org/ezSQL/ezsql)[![Build status](https://ci.appveyor.com/api/projects/status/6s8oqnoxa2i5k04f?svg=true)](https://ci.appveyor.com/project/jv2222/ezsql)[![codecov](https://codecov.io/gh/ezSQL/ezSQL/branch/master/graph/badge.svg)](https://codecov.io/gh/ezSQL/ezSQL)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aad1f6aaaaa14f60933e75615da900b8)](https://www.codacy.com/app/techno-express/ezsql?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ezSQL/ezsql&amp;utm_campaign=Badge_Grade)[![Maintainability](https://api.codeclimate.com/v1/badges/6f6107f25e9de7bf4272/maintainability)](https://codeclimate.com/github/ezSQL/ezsql/maintainability)
+***The async class to make it very easy to deal with database connections.***
 
-***A class to make it very easy to deal with database connections.***
+This is an version of ezsql with **async** capability. In order to use the _native async_ feature of **mysql** or **postgresql**,
+there needs to be an way to do other things while waiting for the database to be ready to process you request.
 
-This is [__version 4__](https://github.com/ezSQL/ezsql/tree/v4) that has many modern programming practices in which will break users of version 3.
+This package takes advantage of `yield` to order to produce coroutines.
+If you have no formulary with coroutines or generators, will need to get up to speed before even thinking about using this package.
 
-[__Version 3__](https://github.com/ezSQL/ezsql/tree/v3) broke version 2.1.7 in one major way, it required *PHP 5.6*. Which drop mysql extension support, other than that, nothing as far using the library was changed, only additional features.
+For starters check out [David Beazley: Generators: The Final Frontier - PyCon 2014](https://youtu.be/D1twn9kLmYg) __video__ 3:50:54, the concepts and the internals of the talk is what's taking place here.
 
-This library has an `Database` class, an combination of the [Factory](https://en.wikipedia.org/wiki/Factory_method_pattern) pattern with an [Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection) container hosting. This library now is following many OOP principles, one in which, the methods properties public access has been removed. This library also following PSR-2, PSR-4, PSR-11 conventions, and mostly PSR-1, that's still an work in progress.
+Then after, read the [readme](https://symplely.github.io/coroutine/) of [symmplely/coroutine](https://github.com/symplely/coroutine) package and the [examples](https://github.com/symplely/coroutine/tree/master/examples) to get the feel and power of what is possible.
 
-* More Todo...
-
-For an full overview see [documentation Wiki](https://github.com/ezSQL/ezsql/wiki/Documentation), which is not completely finish.
+For an full overview of **ezsql**, see [documentation Wiki](https://github.com/ezSQL/ezsql/wiki/Documentation), which is not completely finish.
 
 ## Installation
 
-    composer require ezsql/ezsql
+    composer require symplely/sql
 
 ## Usage
 

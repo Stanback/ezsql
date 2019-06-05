@@ -157,13 +157,13 @@ class ezsqlModel extends ezQuery implements ezsqlModelInterface
 	* Function called
 	* @var string
 	*/
-	private $func_call; 
+	protected $func_call; 
 
 	/**
 	* All functions called
 	* @var array 
 	*/
-	private $all_func_calls = array();
+	protected $all_func_calls = array();
 	
 	/**
 	* Constructor
