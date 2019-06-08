@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace ezsql\Database;
 
 use Exception;
-use ezsql\ezsqlModel;
+use ezsql\ezsqlModelAsync;
 use ezsql\ConfigInterface;
 use ezsql\DatabaseInterface;
 
-class ez_mysqli extends ezsqlModel implements DatabaseInterface
+class ez_mysqli extends ezsqlModelAsync implements DatabaseInterface
 {    
     protected $return_val = 0;
     protected $is_insert = false;

@@ -9,7 +9,7 @@ use ezsql\ezsqlModelInterface;
  * Core class containing common functions to manipulate query result
  * sets once returned
  */	
-class ezsqlModel extends ezQuery implements ezsqlModelInterface
+class ezsqlModel extends ezQueryAsync implements ezsqlModelInterface
 {
 	protected $isSecure = false;
 	protected $secureOptions = null;
