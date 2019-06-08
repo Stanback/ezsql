@@ -170,8 +170,12 @@ class async_pgsql extends ez_pgsql implements async_interface
         @\pg_send_query($this->dbh, $query);
         $result = \pg_get_result($this->dbh);
 
-        if ($this->processQueryResult($query, $result) === false)
+        if ($this->processQueryResult($query, $result) === false) {
+            if ($this->isTransactional)
+                throw new \Exception($this->getLast_Error());
+
             return false;
+        }
 
         // disk caching of queries
         $this->store_cache($query, $this->is_insert);

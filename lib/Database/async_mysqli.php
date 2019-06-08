@@ -89,17 +89,13 @@ class async_mysqli extends ez_mysqli implements async_interface
         $connection = yield $this->query_wait();
 
         $result = \mysqli_reap_async_query($connection);
-        // If there is an error then take note of it..
-        if ( $str = \mysqli_error($this->dbh) ) {
-            $this->register_error($str);
-                    
-            // If debug ALL queries
-            $this->trace || $this->debug_all ? $this->debug() : null ;
+
+        if ($this->processQueryResult($query, $result) === false) {
+            if ($this->isTransactional)
+                throw new \Exception($this->getLast_Error());
+
             return false;
         }
-
-        if ($this->processQueryResult($query, $result) === false)
-            return false;
 
         // disk caching of queries
         $this->store_cache($query, $this->is_insert);
